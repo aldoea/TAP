@@ -42,7 +42,7 @@ public class EventosCalculadora implements EventHandler {
             case "*":
                 break;
             case "=":
-                if(ultimoValor == 0) {
+                if(ultimoValor == 0) { // Para asegurar que se opere el ultimo valor si no se realiza una operación nueva.
                     ultimoValor = Integer.parseInt(txtOperacion.getText());
                     System.out.println("setting last value " + ultimoValor);
                 }

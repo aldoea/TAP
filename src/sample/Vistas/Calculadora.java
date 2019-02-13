@@ -7,12 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import sample.Eventos.EventosCalculadora;
 
 public class Calculadora extends Stage implements EventHandler {
@@ -29,6 +31,8 @@ public class Calculadora extends Stage implements EventHandler {
         escena = new Scene(vBox, 200, 250);
         setScene(escena);
         setTitle("Calculadora");
+        // Se implementa de esta manera porque arriba esta declarado el manejador general
+        this.addEventHandler(WindowEvent.WINDOW_SHOWN, this);
         show();
     }
 
@@ -62,6 +66,10 @@ public class Calculadora extends Stage implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        System.out.println("Hello Friend");
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Esta es una alerta informativa");
+        alerta.setHeaderText("Este es el encabezado de la alerta");
+        alerta.setContentText("Aqui va un buen chorizo");
+        alerta.showAndWait();
     }
 }
