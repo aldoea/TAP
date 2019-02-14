@@ -23,16 +23,22 @@ public class Calculadora extends Stage implements EventHandler {
     VBox vBox;
     HBox[] arHBox;
     Button[] arBtns;
-    private String[] valores = {"7","8","9","+","4","5","6","-","1","2","3","*","0",".","=","/"};
+    private String[] valores = {
+            "7","8","9","+",
+            "4","5","6","-",
+            "1","2","3","*",
+            "0",".","=","/",
+            "Ç","","",""
+    };
     private Scene escena;
 
     public Calculadora(){
         CrearGUI();
-        escena = new Scene(vBox, 200, 250);
+        escena = new Scene(vBox, 200, 300);
         setScene(escena);
         setTitle("Calculadora");
         // Se implementa de esta manera porque arriba esta declarado el manejador general
-        this.addEventHandler(WindowEvent.WINDOW_SHOWN, this);
+        this.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, this);
         show();
     }
 
@@ -45,8 +51,8 @@ public class Calculadora extends Stage implements EventHandler {
         txtOperacion.setEditable(false);
         vBox.getChildren().add(txtOperacion);
 
-        arHBox= new HBox[4];
-        arBtns= new Button[16];
+        arHBox= new HBox[5];
+        arBtns= new Button[20];
 
         int posBtn=0;
         for(int i=0; i<arHBox.length;i++){
@@ -54,6 +60,7 @@ public class Calculadora extends Stage implements EventHandler {
             arHBox[i].setSpacing(18);
             arHBox[i].setPadding(new Insets(5));
             for(int j=0; j<4; j++){
+                if(valores[posBtn].equals("")) { posBtn++; continue;}
                 arBtns[posBtn]= new Button(valores[posBtn]);
                 arBtns[posBtn].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventosCalculadora(valores[posBtn], txtOperacion));
                 arBtns[posBtn].setStyle("-fx-font: 15 arial");
@@ -61,7 +68,7 @@ public class Calculadora extends Stage implements EventHandler {
                 posBtn++;
             }
         }
-        vBox.getChildren().addAll(arHBox[0],arHBox[1],arHBox[2],arHBox[3]);
+        vBox.getChildren().addAll(arHBox[0],arHBox[1],arHBox[2],arHBox[3], arHBox[4]);
     }
 
     @Override
@@ -69,7 +76,7 @@ public class Calculadora extends Stage implements EventHandler {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Esta es una alerta informativa");
         alerta.setHeaderText("Este es el encabezado de la alerta");
-        alerta.setContentText("Aqui va un buen chorizo");
+        alerta.setContentText("Aqui va un buen chorizo chorero");
         alerta.showAndWait();
     }
 }
