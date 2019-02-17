@@ -30,9 +30,10 @@ public class Main extends Application {
         CreateMenu();
 
         escena = new Scene(panel);
+        escena.getStylesheets().add(getClass().getResource("CSS/estilos.css").toExternalForm());
         primaryStage.setTitle("Prácticas Tópicos Avanzado de Programación");
         primaryStage.setScene(escena);
-        //primaryStage.setMaximized(true);
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
