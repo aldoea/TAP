@@ -38,7 +38,7 @@ public class Calculadora extends Stage implements EventHandler {
         setScene(escena);
         setTitle("Calculadora");
         // Se implementa de esta manera porque arriba esta declarado el manejador general
-        this.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, this);
+        //this.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, this);
         show();
     }
 
