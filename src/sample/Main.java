@@ -5,10 +5,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.Vistas.Calculadora;
+import sample.Vistas.RestauranteMenu;
 import sample.Vistas.Taquimecanografo;
 
 public class Main extends Application {
@@ -16,7 +18,7 @@ public class Main extends Application {
     private Scene escena;
     private MenuBar menuBar;
     private Menu menCompetencia1, menCompetencia2, menSalir;
-    private MenuItem itmCalculadora, itmTaquimecanografo, itmSalir;
+    private MenuItem itmCalculadora, itmTaquimecanografo, itmRestauranteMenu, itmSalir;
     private BorderPane panel;
 
 
@@ -29,8 +31,12 @@ public class Main extends Application {
         panel = new BorderPane();
         CreateMenu();
 
+        TitledPane objTP = new TitledPane();
+        objTP.getStyleClass().add("danger");
+        panel.setLeft(objTP);
+
         escena = new Scene(panel);
-        escena.getStylesheets().add(getClass().getResource("CSS/estilos.css").toExternalForm());
+        escena.getStylesheets().add(getClass().getResource("CSS/Bootstrap3.css").toExternalForm());
         primaryStage.setTitle("Prácticas Tópicos Avanzado de Programación");
         primaryStage.setScene(escena);
         primaryStage.setMaximized(true);
@@ -52,6 +58,11 @@ public class Main extends Application {
         itmTaquimecanografo.setOnAction(actionEvent -> EventoItem(2));
         menCompetencia2.getItems().addAll(itmTaquimecanografo);
 
+
+        itmRestauranteMenu = new MenuItem("Menú");
+        itmRestauranteMenu.setOnAction(actionEvent -> EventoItem(4));
+        menCompetencia2.getItems().add(itmRestauranteMenu);
+
         itmSalir = new MenuItem("Bye");
         itmSalir.setOnAction(actionEvent -> EventoItem(3));
         itmSalir.setAccelerator(KeyCombination.NO_MATCH.keyCombination("Ctrl+x"));
@@ -72,6 +83,8 @@ public class Main extends Application {
             case 3: // New practica2() o mejor para salir
                 System.exit(0);
                 break;
+            case 4:
+                new RestauranteMenu();
             default:
                 break;
         }

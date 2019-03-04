@@ -1,6 +1,27 @@
 .root {
-    -fx-background-image: url("/sample/Imagenes/akira_back.jpg"),url("/sample/Imagenes/toei_logo.png");
+    -fx-background-image: url("/sample/Imagenes/bobsi.jpg"),url("/sample/Imagenes/logo-lion.png");
     -fx-background-size: auto, 300 300;
     -fx-background-repeat: stretch, no-repeat;
     -fx-background-position: center, center;
+}
+
+.menu-bar {
+    //-fx-background-color: #337F5B;
+    -fx-background-color: linear-gradient(to bottom right, red, yellow, green);
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1;
+    -fx-font-size: 15px;
+}
+
+.menu:hover {
+    -fx-background-color: rgba(0,0,0,0);
+    -fx-font-size: 25px;
+}
+
+.menu:not(:hover) {
+    -fx-font-size: 15px;
+}
+
+.menu:hover .label {
+    -fx-text-fill: white;
 }

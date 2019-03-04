@@ -27,11 +27,13 @@ public class Taquimecanografo extends Stage {
 
     private void CrearGUI() {
         vbox = new VBox();
+        vbox.getStylesheets().add(getClass().getResource("../CSS/taquimecanografo.css").toExternalForm());
         tlbMenu = new ToolBar();
         txtTexto = new TextArea();
         txtTexto.setEditable(false);
         txtEscritura = new TextArea();
-        txtEscritura.addEventHandler(KeyEvent.KEY_TYPED, new EventoTeclado());
+        //txtEscritura.addEventHandler(KeyEvent.KEY_PRESSED, new EventoTeclado());
+        txtEscritura.setOnKeyPressed(new EventoTeclado());
         // Añadir el teclado.
 
         vbox.getChildren().addAll(tlbMenu, txtTexto, txtEscritura);
