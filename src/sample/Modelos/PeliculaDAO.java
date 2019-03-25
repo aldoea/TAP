@@ -1,5 +1,9 @@
 package sample.Modelos;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class PeliculaDAO {
@@ -7,7 +11,7 @@ public class PeliculaDAO {
     private String nomPelicula;
     private int duracion;
     private String descPelicula;
-    private int clase;
+    private String clase;
     private int idCategoria;
 
     public int getIdPelicula() {
@@ -42,11 +46,11 @@ public class PeliculaDAO {
         this.descPelicula = descPelicula;
     }
 
-    public int getClase() {
+    public String getClase() {
         return clase;
     }
 
-    public void setClase(int clase) {
+    public void setClase(String clase) {
         this.clase = clase;
     }
 
@@ -60,12 +64,13 @@ public class PeliculaDAO {
 
     public void actualizar() {
         String query = "UPDATE tblpelicula SET " +
-                "nomPelicula='NuevoValor'," +
-                "duracion=130," +
-                "descPelicula='eejejejejejejejejejejejeje'" +
-                "clase='CDMX'" +
-                "idCategoria=2" +
-            "WHERE idPelicula=1";
+                    "nomPelicula = '"+nomPelicula+"', " +
+                    "duracion = "+duracion+"," +
+                    "descPelicula = '"+descPelicula+"'," +
+                    "clase='"+clase+"'," +
+                    "idCategoria="+idCategoria+" " +
+                "WHERE" +
+                    " idpelicula = "+idPelicula;
         try{
             Statement stmt = Conexion.conn.createStatement();
             stmt.execute(query);
@@ -75,7 +80,7 @@ public class PeliculaDAO {
     }
 
     public void eliminar() {
-        String query = "DELETE FROM tblpelicula WHERE idPelicula=1";
+        String query = "DELETE FROM tblpelicula WHERE idPelicula=" + idPelicula;
         try{
             Statement stmt = Conexion.conn.createStatement();
             stmt.execute(query);
@@ -84,34 +89,47 @@ public class PeliculaDAO {
         }
     }
 
-    public void seleccionar() {
-        String query = "SELECT FROM tblpelicula WHERE idPelicula=1";
+    public ObservableList<PeliculaDAO> seleccionar() {
+        ObservableList<PeliculaDAO> lista = FXCollections.observableArrayList();
+        PeliculaDAO objPDAO = null;
+        String query = "SELECT * FROM tblpelicula ORDER BY nomPelicula";
         try{
             Statement stmt = Conexion.conn.createStatement();
-            stmt.execute(query);
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()){
+                objPDAO = new PeliculaDAO();
+                objPDAO.idPelicula = res.getInt("idPelicula");
+                objPDAO.nomPelicula = res.getString("nomPelicula");
+                objPDAO.duracion = res.getInt("duracion");
+                objPDAO.descPelicula = res.getString("descPelicula");
+                objPDAO.clase = res.getString("clase");
+                objPDAO.idCategoria = res.getInt("idCategoria");
+                lista.add(objPDAO);
+            }
         }catch (Exception e) {
             System.err.println("An error happens" + e.toString());
         }
+        return lista;
     }
 
     public void insertar() {
         String query = "INSERT INTO tblpelicula(" +
                 "nomPelicula," +
                 "duracion," +
-                "descPelicula" +
-                "clase" +
+                "descPelicula," +
+                "clase," +
                 "idCategoria)" +
             " values(" +
-                "'valor1'," +
-                "120, " +
-                "'Lorem ipsum dolor mentus apterus lepsem', " +
-                "'AA', " +
-                "1) ";
+                "'" + nomPelicula + "'," +
+                duracion + "," +
+                "'" + descPelicula + "', " +
+                "'" + clase + "', " +
+                idCategoria + ")";
         try{
             Statement stmt = Conexion.conn.createStatement();
             stmt.execute(query);
         }catch (Exception e) {
-            System.err.println("An error happens" + e.toString());
+            System.err.println("An error happens" + e);
         }
     }
 }

@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -9,16 +11,17 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import sample.Vistas.Calculadora;
-import sample.Vistas.RestauranteMenu;
-import sample.Vistas.Taquimecanografo;
+import javafx.stage.WindowEvent;
+import sample.Componentes.Vengadores;
+import sample.Modelos.Conexion;
+import sample.Vistas.*;
 
-public class Main extends Application {
+public class Main extends Application implements EventHandler {
 
     private Scene escena;
     private MenuBar menuBar;
     private Menu menCompetencia1, menCompetencia2, menSalir;
-    private MenuItem itmCalculadora, itmTaquimecanografo, itmRestauranteMenu, itmSalir;
+    private MenuItem itmCalculadora, itmTaquimecanografo, itmRestauranteMenu, itmCuadroMagico, itmSalir, itmDatos, itmHilos;
     private BorderPane panel;
 
 
@@ -39,7 +42,8 @@ public class Main extends Application {
         escena.getStylesheets().add(getClass().getResource("CSS/Bootstrap3.css").toExternalForm());
         primaryStage.setTitle("Prácticas Tópicos Avanzado de Programación");
         primaryStage.setScene(escena);
-        primaryStage.setMaximized(true);
+        //primaryStage.setMaximized(true);
+        primaryStage.addEventHandler(WindowEvent.WINDOW_SHOWN, this);
         primaryStage.show();
     }
 
@@ -54,17 +58,29 @@ public class Main extends Application {
         itmCalculadora.setOnAction(actionEvent -> EventoItem(1));
         menCompetencia1.getItems().addAll(itmCalculadora);
 
+        itmCuadroMagico = new MenuItem("Cuadro Mágico");
+        itmCuadroMagico.setOnAction(actionEvent -> EventoItem(5));
+        menCompetencia1.getItems().add(itmCuadroMagico);
+
+        itmDatos = new MenuItem("Acceso a datos (BD)");
+        itmDatos.setOnAction(actionEvent -> EventoItem(6));
+        menCompetencia1.getItems().add(itmDatos);
+
         itmTaquimecanografo = new MenuItem("Taquimecanografo");
         itmTaquimecanografo.setOnAction(actionEvent -> EventoItem(2));
-        menCompetencia2.getItems().addAll(itmTaquimecanografo);
-
+        menCompetencia2.getItems().add(itmTaquimecanografo);
 
         itmRestauranteMenu = new MenuItem("Menú");
         itmRestauranteMenu.setOnAction(actionEvent -> EventoItem(4));
         menCompetencia2.getItems().add(itmRestauranteMenu);
 
+        itmHilos = new MenuItem("Vengadromo");
+        itmHilos.setOnAction(actionEvent -> EventoItem(7));
+        menCompetencia2.getItems().add(itmHilos);
+
+
         itmSalir = new MenuItem("Bye");
-        itmSalir.setOnAction(actionEvent -> EventoItem(3));
+        itmSalir.setOnAction(actionEvent -> EventoItem(0));
         itmSalir.setAccelerator(KeyCombination.NO_MATCH.keyCombination("Ctrl+x"));
         menSalir.getItems().add(itmSalir);
 
@@ -74,20 +90,37 @@ public class Main extends Application {
 
     private void EventoItem(int opc) {
         switch (opc) {
+            case 0: // New practica2() o mejor para salir
+                System.exit(0);
+                break;
             case 1:
                 new Calculadora();
                 break;
-            case 2:
-                new Taquimecanografo();
-                break;
-            case 3: // New practica2() o mejor para salir
-                System.exit(0);
+                case 2:
+            new Taquimecanografo();
                 break;
             case 4:
                 new RestauranteMenu();
+                break;
+            case 5:
+                new CuadroMagico();
+                break;
+            case 6:
+                new ListaPeliculas();
+                break;
+            case 7:
+                new Vengadromo();
+                break;
             default:
                 break;
         }
     }
 
+    @Override
+    public void handle(Event event) {
+        Conexion.crearConexion();
+        if(Conexion.conn != null) {
+            System.out.println("Conexion exitosa");
+        }
+    }
 }
