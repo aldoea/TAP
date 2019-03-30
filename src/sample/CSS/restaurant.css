@@ -1,0 +1,19 @@
+.tab-pane .tab-header-area .tab .tab-label {
+    -fx-text-fill: seagreen;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.tab-pane {
+    -fx-tab-min-height: 75px;
+    -fx-tab-max-height: 75px;
+    -fx-tab-min-width: 250px;
+    -fx-tab-max-width: 250px;
+    -fx-max-height: 500px;
+    -fx-min-height: 500px;
+}
+
+.test-class {
+    -fx-padding: 50px;
+    -fx-alignment: center;
+}
