@@ -66,13 +66,13 @@ public class Main extends Application implements EventHandler {
         itmDatos.setOnAction(actionEvent -> EventoItem(6));
         menCompetencia1.getItems().add(itmDatos);
 
+        itmRestauranteMenu = new MenuItem("Menú");
+        itmRestauranteMenu.setOnAction(actionEvent -> EventoItem(4));
+        menCompetencia1.getItems().add(itmRestauranteMenu);
+
         itmTaquimecanografo = new MenuItem("Taquimecanografo");
         itmTaquimecanografo.setOnAction(actionEvent -> EventoItem(2));
         menCompetencia2.getItems().add(itmTaquimecanografo);
-
-        itmRestauranteMenu = new MenuItem("Menú");
-        itmRestauranteMenu.setOnAction(actionEvent -> EventoItem(4));
-        menCompetencia2.getItems().add(itmRestauranteMenu);
 
         itmHilos = new MenuItem("Vengadromo");
         itmHilos.setOnAction(actionEvent -> EventoItem(7));
@@ -118,7 +118,7 @@ public class Main extends Application implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        Conexion.crearConexion();
+        Conexion.crearConexion("mexflix");
         if(Conexion.conn != null) {
             System.out.println("Conexion exitosa");
         }

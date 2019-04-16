@@ -448,11 +448,11 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 
 .tab-pane .tab-header-area .tab .tab-label {
-    -fx-text-fill: #337ab7;
+    -fx-text-fill: #ffffff;
 }
 
 .tab-pane .tab-header-area .tab:hover {
-    -fx-background-color: #eeeeee;
+    -fx-background-color: rgba(238, 238, 238, 0.61);
 }
 .tab-pane .tab-header-area .tab:disabled:hover {
     -fx-background-color: transparent;
@@ -461,10 +461,10 @@ VBox > .split-menu-button.last > .arrow-button {
 .tab-pane .tab-header-area .tab:selected {
     -fx-focus-color: transparent;
     -fx-border-color: #dddddd #dddddd white #dddddd;
-    -fx-background-color: white;
+    -fx-background-color: rgba(255, 255, 255, 0.6);
 }
 .tab-pane .tab-header-area .tab:selected .tab-label {
-    -fx-text-fill: #333333;
+    -fx-text-fill: rgba(41, 41, 41, 1);
 }
 .tab-pane > .tab-content-area {
     -fx-background-color: white;
